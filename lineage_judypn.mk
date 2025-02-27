@@ -33,6 +33,9 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 # include private signing keys
 -include vendor/niigo-priv/keys/keys.mk
 
+# always append time of day
+LINEAGE_VERSION_APPEND_TIME_OF_DAY := true
+
 # Device identifiers
 PRODUCT_NAME := lineage_judypn
 PRODUCT_DEVICE := judypn
