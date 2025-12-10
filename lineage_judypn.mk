@@ -39,6 +39,9 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 # always append time of day
 LINEAGE_VERSION_APPEND_TIME_OF_DAY := true
 
+# local patch - fry audiofx
+NUKE_AUDIOFX := true
+
 # Device identifiers
 PRODUCT_NAME := lineage_judypn
 PRODUCT_DEVICE := judypn
