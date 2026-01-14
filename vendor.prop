@@ -3,6 +3,7 @@
 #
 
 # Audio
+af.resampler.quality=7
 ro.hardware.audio.primary=judypn
 
 # Bluetooth
