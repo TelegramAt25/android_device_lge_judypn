@@ -1,0 +1,38 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: fukiame <fukiame@proton.me>
+Date: Sun, 11 Jan 2026 13:49:59 +0700
+Subject: [PATCH] [DNM] media: libeffects: allow frying effects from a persist
+ prop
+
+Change-Id: I83dfc2e97691ab0ebbd1802e12760d6045525b5a
+Signed-off-by: fukiame <fukiame@proton.me>
+
+diff --git a/media/libeffects/factory/EffectsFactory.c b/media/libeffects/factory/EffectsFactory.c
+index dcdf63422bc9023a06a2bd78013ab6851bfd3910..d3a2b9dae7017707e0aad5e5cb7379e16dd45f42 100644
+--- a/media/libeffects/factory/EffectsFactory.c
++++ b/media/libeffects/factory/EffectsFactory.c
+@@ -456,10 +456,11 @@ int init() {
+ 
+     // ignore effects or not?
+     const bool ignoreFxConfFiles = property_get_bool(PROPERTY_IGNORE_EFFECTS, false);
++    const bool ignoreFxConfFilesP = property_get_bool(PROPERTY_IGNORE_EFFECTS_P, false);
+ 
+     pthread_mutex_init(&gLibLock, NULL);
+ 
+-    if (ignoreFxConfFiles) {
++    if (ignoreFxConfFiles || ignoreFxConfFilesP) {
+         ALOGI("Audio effects in configuration files will be ignored");
+     } else {
+         gConfigNbElemSkipped = EffectLoadXmlEffectConfig(NULL);
+diff --git a/media/libeffects/factory/EffectsFactory.h b/media/libeffects/factory/EffectsFactory.h
+index 1936343fb62d336a4e369e8792e51eb9542dc123..51d132bebc217540c497fc4c900a7f159a6cf8a9 100644
+--- a/media/libeffects/factory/EffectsFactory.h
++++ b/media/libeffects/factory/EffectsFactory.h
+@@ -30,6 +30,7 @@ extern "C" {
+ #define EFFECT_LIBRARY_API_VERSION_CURRENT EFFECT_LIBRARY_API_VERSION_3_1
+ 
+ #define PROPERTY_IGNORE_EFFECTS "ro.audio.ignore_effects"
++#define PROPERTY_IGNORE_EFFECTS_P "persist.audio.ignore_effects"
+ 
+ typedef struct list_elem_s {
+     void *object;

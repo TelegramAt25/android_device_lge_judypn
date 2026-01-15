@@ -1,0 +1,21 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: fukiame <fukiame@proton.me>
+Date: Sun, 11 Jan 2026 13:52:14 +0700
+Subject: [PATCH] [DNM] sepolicy: label persist.audio.ignore_effects
+
+Change-Id: Ia293f77f3fc3ab86d4780d752f9f557cbebfacb8
+Signed-off-by: fukiame <fukiame@proton.me>
+
+diff --git a/private/property_contexts b/private/property_contexts
+index c06af821bc2f586937c7a0375ea9c7f6e84d3ecd..83ce3f12c9fe1036ae6c34ac7986dab03104a82e 100644
+--- a/private/property_contexts
++++ b/private/property_contexts
+@@ -457,6 +457,8 @@ ro.audio.ignore_effects   u:object_r:audio_config_prop:s0 exact bool
+ ro.audio.monitorRotation  u:object_r:audio_config_prop:s0 exact bool
+ ro.audio.offload_wakelock u:object_r:audio_config_prop:s0 exact bool
+ 
++persist.audio.ignore_effects u:object_r:audio_config_prop:s0 exact bool
++
+ # Configure whether new device has spatialization default enabled.
+ ro.audio.spatializer_binaural_enabled_default u:object_r:audio_config_prop:s0 exact bool
+ ro.audio.spatializer_transaural_enabled_default u:object_r:audio_config_prop:s0 exact bool
