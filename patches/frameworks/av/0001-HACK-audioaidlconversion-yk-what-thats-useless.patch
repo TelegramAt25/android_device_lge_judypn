@@ -1,0 +1,29 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: nift4 <nift4@protonmail.com>
+Date: Mon, 12 Jan 2026 22:11:20 +0700
+Subject: [PATCH] [HACK] audioaidlconversion: "yk what thats useless"
+
+(for context, this is required for tv boxes only so it doesnt matter that we reset to default every time)
+
+https://t.me/c/2007202545/470808
+https://t.me/c/2007202545/470954
+
+Change-Id: I1f7112d49a4af2385ac5b54ac0a9f2f1962460a8
+Signed-off-by: nift4 <nift4@protonmail.com>
+Signed-off-by: fukiame <fukiame@proton.me>
+
+diff --git a/media/audioaidlconversion/AidlConversionCppNdk.cpp b/media/audioaidlconversion/AidlConversionCppNdk.cpp
+index 99b538152c57bc3c9358f8c86ca6754de95940fe..5d8ff071433650223d9c952cdf012e22dfbadd4d 100644
+--- a/media/audioaidlconversion/AidlConversionCppNdk.cpp
++++ b/media/audioaidlconversion/AidlConversionCppNdk.cpp
+@@ -2091,10 +2091,6 @@ aidl2legacy_AudioOffloadInfo_audio_offload_info_t(const AudioOffloadInfo& aidl)
+     legacy.bit_width = VALUE_OR_RETURN(convertIntegral<int32_t>(aidl.bitWidth));
+     legacy.offload_buffer_size = VALUE_OR_RETURN(convertIntegral<int32_t>(aidl.offloadBufferSize));
+     legacy.usage = VALUE_OR_RETURN(aidl2legacy_AudioUsage_audio_usage_t(aidl.usage));
+-    legacy.encapsulation_mode = VALUE_OR_RETURN(
+-            aidl2legacy_AudioEncapsulationMode_audio_encapsulation_mode_t(aidl.encapsulationMode));
+-    legacy.content_id = VALUE_OR_RETURN(convertReinterpret<int32_t>(aidl.contentId));
+-    legacy.sync_id = VALUE_OR_RETURN(convertReinterpret<int32_t>(aidl.syncId));
+     return legacy;
+ }
+ 

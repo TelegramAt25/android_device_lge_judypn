@@ -1,0 +1,24 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: nift4 <nift4@protonmail.com>
+Date: Tue, 13 Jan 2026 03:01:14 +0700
+Subject: [PATCH] [HACK] audio: give older offload ver to hal
+
+https://t.me/c/2007202545/470680
+
+Change-Id: Ia7c88e6991e2fecbda27da2184b2822766b73663
+Signed-off-by: nift4 <nift4@protonmail.com>
+Signed-off-by: fukiame <fukiame@proton.me>
+
+diff --git a/audio/common/all-versions/default/HidlUtils.cpp b/audio/common/all-versions/default/HidlUtils.cpp
+index c0dcd80ac0482eb8ac291dd7bd44c0a0f1dec2aa..5bd7194ae19aaba5edd82ef836197efd7fa2b864 100644
+--- a/audio/common/all-versions/default/HidlUtils.cpp
++++ b/audio/common/all-versions/default/HidlUtils.cpp
+@@ -153,6 +153,8 @@ status_t HidlUtils::audioOffloadInfoFromHal(const audio_offload_info_t& halOfflo
+ status_t HidlUtils::audioOffloadInfoToHal(const AudioOffloadInfo& offload,
+                                           audio_offload_info_t* halOffload) {
+     *halOffload = AUDIO_INFO_INITIALIZER;
++    halOffload->version = 1;
++    halOffload->size = 0x30;
+     halOffload->sample_rate = offload.sampleRateHz;
+     halOffload->channel_mask = static_cast<audio_channel_mask_t>(offload.channelMask);
+     halOffload->format = static_cast<audio_format_t>(offload.format);
