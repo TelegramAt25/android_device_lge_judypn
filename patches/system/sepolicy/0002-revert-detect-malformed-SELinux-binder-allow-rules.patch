@@ -1,0 +1,40 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: fukiame <fukiame@proton.me>
+Date: Thu, 15 Jan 2026 20:36:20 +0700
+Subject: [PATCH] revert "detect malformed SELinux binder allow rules"
+
+lge
+
+this reverts 35dcf811968210f0d25f7d8289a29a319b9a1ed6
+
+Change-Id: I7b13f76270464cf933ca790b561cf36fb39dff55
+Signed-off-by: fukiame <fukiame@proton.me>
+
+diff --git a/private/domain.te b/private/domain.te
+index 8677edf3cb5f22649722bc9fc4f5645a464e0c7b..bba67934274dc58fceae5bd71c61f567ae9993db 100644
+--- a/private/domain.te
++++ b/private/domain.te
+@@ -2171,23 +2171,6 @@ full_treble_only(`
+ # intsersection of domain & mlsvendorcompat is not empty.)
+ neverallow domain mlsvendorcompat:process fork;
+ 
+-# Detect certain nonsensical binder allow rules. Binder communication
+-# only occurs between processes, so having binder allow rules
+-# associated with non-processes does not make any sense.
+-# Examples of rules which do not make sense include:
+-#
+-#  # files do not host binder services
+-#  allow domain file_type:binder call;
+-#
+-#  # service names are not processes and do not host binder services
+-#  allow domain service_manager_type:binder call;
+-#
+-#  # Files are not processes and cannot initiate binder calls
+-#  allow file_type dumpstate:binder call;
+-#
+-neverallow { -domain } *:binder *;
+-neverallow * { -domain }:binder *;
+-
+ # Only init and otapreopt_chroot should be mounting filesystems on locations
+ # labeled system or vendor (/product and /vendor respectively).
+ neverallow {
